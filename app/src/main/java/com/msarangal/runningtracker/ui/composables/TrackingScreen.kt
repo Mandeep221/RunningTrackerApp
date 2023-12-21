@@ -17,9 +17,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
-fun TrackingScreen() {
+fun TrackingScreen(onToggleBtnClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,20 +40,39 @@ fun TrackingScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .background(color = Color.Blue)
+                .background(color = Color.Blue),
+            onToggleBtnClick = onToggleBtnClick
         )
     }
 }
 
 @Composable
 fun MapContainerView(modifier: Modifier) {
+    val singapore = LatLng(1.35, 103.87)
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(singapore, 10f)
+    }
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        Text(text = "Lets go")
+//        Text(text = "Lets go")
+        GoogleMap(
+            modifier = modifier.fillMaxSize(),
+            cameraPositionState = cameraPositionState
+        ) {
+            Marker(
+                state = MarkerState(position = singapore),
+                title = "Singapore",
+                snippet = "Marker in Singapore"
+            )
+        }
     }
 }
 
 @Composable
-fun TimerView(modifier: Modifier, showFinishBtn: Boolean = false) {
+fun TimerView(
+    modifier: Modifier,
+    showFinishBtn: Boolean = false,
+    onToggleBtnClick: () -> Unit
+) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -63,6 +88,7 @@ fun TimerView(modifier: Modifier, showFinishBtn: Boolean = false) {
             } else {
                 // Do something else
             }
+            onToggleBtnClick.invoke()
         }) {
             Text(text = if (showFinishBtn) "FINISH RUN" else "START")
         }
@@ -72,5 +98,5 @@ fun TimerView(modifier: Modifier, showFinishBtn: Boolean = false) {
 @Preview
 @Composable
 fun TrackingPreview() {
-    TrackingScreen()
+    TrackingScreen {}
 }

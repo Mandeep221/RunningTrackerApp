@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
+import com.github.mikephil.charting.charts.LineChart
 
 @Composable
 fun StatisticsScreen() {
@@ -71,7 +73,7 @@ fun StatisticsScreen() {
                 .weight(3f),
             contentAlignment = Alignment.Center
         ) {
-            Text(text = "Place for chart")
+            LineChartView()
         }
     }
 }
@@ -90,6 +92,13 @@ fun StatItemView(
         Text(text = text, fontSize = 32.sp)
         Text(text = subText)
     }
+}
+
+@Composable
+fun LineChartView() {
+    AndroidView(
+        factory = { context -> LineChart(context) }
+    )
 }
 
 @Preview
