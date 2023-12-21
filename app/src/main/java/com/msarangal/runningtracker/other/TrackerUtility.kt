@@ -3,6 +3,7 @@ package com.msarangal.runningtracker.other
 import android.Manifest
 import android.content.Context
 import android.os.Build
+import androidx.annotation.RequiresApi
 import pub.devrel.easypermissions.EasyPermissions
 
 object TrackerUtility {
@@ -24,4 +25,11 @@ object TrackerUtility {
             )
         }
 
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    fun hasNotificationPermissions(context: Context) =
+        EasyPermissions.hasPermissions(
+            context,
+            Manifest.permission.POST_NOTIFICATIONS,
+        )
 }
