@@ -1,6 +1,7 @@
 package com.msarangal.runningtracker.ui.composables
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SetupView() {
+fun SetupScreen(onClickContinue: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -68,7 +69,10 @@ fun SetupView() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(color = Color.Blue)
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .clickable {
+                        onClickContinue.invoke()
+                    },
                 text = "Continue",
                 color = Color.White,
                 textAlign = TextAlign.End,
@@ -81,5 +85,5 @@ fun SetupView() {
 @Preview
 @Composable
 fun SetupPreview() {
-    SetupView()
+    SetupScreen {}
 }

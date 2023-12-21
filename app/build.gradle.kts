@@ -120,6 +120,9 @@ dependencies {
     // MPAndroidChart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    //AppCompat
+    implementation("androidx.appcompat:appcompat:1.6.1")
+
 //    implementation("android.arch.lifecycle:extensions:1.1.1")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.0-beta03")
 }

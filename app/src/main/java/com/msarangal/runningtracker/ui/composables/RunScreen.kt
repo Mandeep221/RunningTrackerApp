@@ -9,10 +9,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -28,13 +32,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun RunView() {
+fun RunScreen(onFabClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White)
     ) {
-        Column {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.End
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -51,12 +59,20 @@ fun RunView() {
                 )
                 SpinnerView(modifier = Modifier.weight(1f))
             }
-            LazyColumn(content = {
+            LazyColumn(modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth(), content = {
                 val runs = listOf("Run1", "Run2", "Run3", "Run4", "Run5")
                 runs.forEach {
                     item { Text(text = it) }
                 }
             })
+
+            FABView(
+                modifier = Modifier.padding(bottom = 92.dp, end = 40.dp)
+            ) {
+                onFabClick.invoke()
+            }
         }
     }
 }
@@ -114,8 +130,21 @@ fun SpinnerView(modifier: Modifier) {
     }
 }
 
+@Composable
+fun FABView(
+    modifier: Modifier,
+    onFabClick: () -> Unit
+) {
+    FloatingActionButton(
+        modifier = modifier,
+        onClick = { onFabClick() },
+    ) {
+        Icon(Icons.Filled.Add, "Floating action button.")
+    }
+}
+
 @Preview
 @Composable
 fun RunPreview() {
-    RunView()
+    RunScreen {}
 }
