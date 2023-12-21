@@ -123,8 +123,16 @@ dependencies {
     //AppCompat
     implementation("androidx.appcompat:appcompat:1.6.1")
 
-//    implementation("android.arch.lifecycle:extensions:1.1.1")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.0-beta03")
+
+    // Coil
+    implementation("io.coil-kt:coil-compose:1.4.0")
+
+    // WorkManager with Coroutines
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
 }
 
 kapt {

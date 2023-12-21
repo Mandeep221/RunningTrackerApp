@@ -7,7 +7,7 @@ import pub.devrel.easypermissions.EasyPermissions
 
 object TrackerUtility {
 
-    fun hasLocationPermissions(context: Context) {
+    fun hasLocationPermissions(context: Context) =
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             // don't need explicit permission for ACCESS_BACKGROUND_LOCATION
             EasyPermissions.hasPermissions(
@@ -23,5 +23,5 @@ object TrackerUtility {
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION
             )
         }
-    }
+
 }
