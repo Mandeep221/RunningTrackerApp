@@ -107,15 +107,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
 
-//    // Dagger Core
-//    implementation("com.google.dagger:dagger:2.45")
-//    kapt("com.google.dagger:dagger-compiler:2.45")
-//
-//    // Dagger Android
-//    api("com.google.dagger:dagger-android:2.45")
-//    api("com.google.dagger:dagger-android-support:2.28.1")
-//    kapt("com.google.dagger:dagger-android-processor:2.23.2")
-
     // Hilt DI
     implementation("com.google.dagger:hilt-android:2.45")
     kapt("com.google.dagger:hilt-android-compiler:2.45")

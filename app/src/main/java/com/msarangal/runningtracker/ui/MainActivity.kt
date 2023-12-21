@@ -1,40 +1,51 @@
 package com.msarangal.runningtracker.ui
 
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.msarangal.runningtracker.R
 import com.msarangal.runningtracker.db.RunDao
 import com.msarangal.runningtracker.ui.theme.RunningTrackerTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var runDao: RunDao
 
+    private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var navHostFragment: NavHostFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("Run Dao", "${runDao.hashCode()}")
-        setContent {
-            RunningTrackerTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Mandeep")
-                }
+        setContentView(R.layout.activity_main_layout)
+        setupActionBar()
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
+        navHostFragment.findNavController().addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.settingsFragment || destination.id == R.id.runFragment || destination.id == R.id.statisticsFragment) {
+                bottomNavigationView.visibility = View.VISIBLE
+            } else if(destination.id == R.id.trackingFragment || destination.id == R.id.setupFragment) {
+                bottomNavigationView.visibility = View.GONE
             }
+        }
+    }
+
+    private fun setupActionBar() {
+        supportActionBar?.apply {
+            title = "Running App by Mandeep"
         }
     }
 }
