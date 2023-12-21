@@ -1,4 +1,4 @@
-package com.msarangal.runningtracker
+package com.msarangal.runningtracker.ui
 
 import android.os.Bundle
 import android.util.Log

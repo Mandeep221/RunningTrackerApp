@@ -39,6 +39,6 @@ interface RunDao {
     @Query("SELECT SUM(distanceInMeters) FROM running_table")
     fun getTotalDistance(): LiveData<Int>
 
-    @Query("SELECT SUM(distanceInMeters) FROM running_table")
+    @Query("SELECT SUM(averageSpeedInKMH) FROM running_table")
     fun getTotalAvgSpeed(): LiveData<Float>
 }

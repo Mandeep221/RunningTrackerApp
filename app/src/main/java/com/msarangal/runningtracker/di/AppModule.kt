@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.msarangal.runningtracker.db.RunDao
 import com.msarangal.runningtracker.db.RunningDatabase
 import com.msarangal.runningtracker.other.Constants.RUNNING_DATABASE_NAME
+import com.msarangal.runningtracker.repositories.MainRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,4 +36,8 @@ object AppModule {
     fun providesRunningDao(db: RunningDatabase): RunDao {
         return db.getRunDao()
     }
+
+    @Singleton
+    @Provides
+    fun providesMainRepository(runDao: RunDao): MainRepository = MainRepository(runDao = runDao)
 }
