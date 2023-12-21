@@ -1,7 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -106,14 +107,18 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
 
-    // Dagger Core
-    implementation("com.google.dagger:dagger:2.45")
-    kapt("com.google.dagger:dagger-compiler:2.45")
+//    // Dagger Core
+//    implementation("com.google.dagger:dagger:2.45")
+//    kapt("com.google.dagger:dagger-compiler:2.45")
+//
+//    // Dagger Android
+//    api("com.google.dagger:dagger-android:2.45")
+//    api("com.google.dagger:dagger-android-support:2.28.1")
+//    kapt("com.google.dagger:dagger-android-processor:2.23.2")
 
-    // Dagger Android
-    api("com.google.dagger:dagger-android:2.45")
-    api("com.google.dagger:dagger-android-support:2.28.1")
-    kapt("com.google.dagger:dagger-android-processor:2.23.2")
+    // Hilt DI
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-android-compiler:2.45")
 
     // Easy Permissions
     implementation("pub.devrel:easypermissions:3.0.0")
@@ -125,4 +130,8 @@ dependencies {
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 //    implementation("android.arch.lifecycle:extensions:1.1.1")
+}
+
+kapt {
+    correctErrorTypes = true
 }
