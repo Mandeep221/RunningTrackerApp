@@ -121,6 +121,7 @@ dependencies {
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
 //    implementation("android.arch.lifecycle:extensions:1.1.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.0-beta03")
 }
 
 kapt {
