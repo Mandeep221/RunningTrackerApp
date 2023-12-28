@@ -75,12 +75,14 @@ class TrackingService : LifecycleService() {
                         isFirsRun = false
                         Timber.d("Started Service for the first time")
                     } else {
+                        startForegroundService()
                         Timber.d("Resumed Service")
                     }
                 }
 
                 ACTION_PAUSE_SERVICE -> {
                     Timber.d("Paused Service")
+                    pauseService()
                 }
 
                 ACTION_STOP_SERVICE -> {
@@ -91,6 +93,10 @@ class TrackingService : LifecycleService() {
             }
         }
         return super.onStartCommand(intent, flags, startId)
+    }
+
+    private fun pauseService() {
+        isTracking.postValue(false)
     }
 
     @SuppressLint("MissingPermission")
@@ -124,7 +130,6 @@ class TrackingService : LifecycleService() {
             }
         }
     }
-
 
     private fun addPathPoint(location: Location) {
         location.let {

@@ -1,5 +1,7 @@
 package com.msarangal.runningtracker.other
 
+import android.graphics.Color
+
 object Constants {
 
     const val RUNNING_DATABASE_NAME = "running_db"
@@ -9,6 +11,10 @@ object Constants {
     const val ERROR_MSG = "errorMsg"
     const val IMAGE_URI = "imageUri"
     const val FILTER_URI = "filterUri"
+
+    const val POLYLINE_COLOR = Color.RED
+    const val POLYLINE_WIDTH = 8f
+    const val MAP_ZOOM = 15f
 
     const val ACTION_START_OR_RESUME_SERVICE = "ACTION_START_OR_RESUME_SERVICE"
     const val ACTION_PAUSE_SERVICE = "ACTION_PAUSE_SERVICE"
